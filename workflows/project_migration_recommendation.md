@@ -1,35 +1,30 @@
 # Project Migration Recommendation
 
 Date created: 2026-05-30  
+Updated: 2026-06-13  
 Context: Current mixed audit chat covering Reels/business opportunity intake, tool testing, scraper/API evaluation, and framework design.
 
 ## Recommendation
 
-Yes: move the current chat into a dedicated project, but treat it as the historical lab/archive rather than the clean future intake chat.
+Yes: keep the current mixed chat inside `The Lab`, but treat it as the historical archive rather than the clean future intake chat.
 
-Create new chats inside that project for specific functions.
+Create new chats inside the project for specific functions.
 
-## Suggested Project Name
+## Project Name
 
-Recommended:
+Use:
 
-`Opportunity + Tool Audit Lab`
-
-Other acceptable names:
-
-- `Audit Lab`
-- `Opportunity Intake + Tool Testing`
-- `Scraper + Opportunity Audit`
+`The Lab`
 
 ## What This Project Should Contain
 
 The project should contain:
 
-- this existing mixed chat as `Audit Lab v0 / Archive`
-- new clean intake chat for new Reels/posts/tools
-- separate lab/incubator chat for ideas that passed initial audits
-- optional system/framework chat for architecture questions
-- Scraper Audit repo as the external ledger/reference
+- this existing mixed chat as `Archive — Audit Lab v0 / Mixed Chat`
+- a clean intake chat for new Reels/posts/tools
+- an incubator chat for ideas/tools that passed initial audits but do not yet belong elsewhere
+- a framework chat for architecture and system-design questions
+- `Unl0ckedzERO/The-Lab` as the external Git ledger/reference
 
 ## Recommended Chats Inside the Project
 
@@ -41,7 +36,7 @@ Purpose:
 - perform first-pass audits only
 - avoid long implementation branches
 
-### 2. `Lab — Validated Ideas + Tool Tests`
+### 2. `Incubator — Validated Ideas + Tool Tests`
 
 Purpose:
 
@@ -49,15 +44,16 @@ Purpose:
 - run small tests
 - compare tools
 - develop temporary workflows
+- prepare handoffs once a project home becomes clear
 
 ### 3. `Framework — Audit System Design`
 
 Purpose:
 
-- discuss routing rules, project structure, intake categories, scoring rubrics, thresholds, and process design
+- discuss routing rules, project structure, intake categories, scoring rubrics, thresholds, naming schemes, and process design
 - keep meta-questions out of the intake chat
 
-### 4. Current Chat: `Audit Lab v0 / Mixed Archive`
+### 4. `Archive — Audit Lab v0 / Mixed Chat`
 
 Purpose:
 
@@ -78,7 +74,7 @@ Examples:
 
 ## Why This Works
 
-Moving the current chat into a project preserves useful context without forcing future intake to stay mixed.
+Moving the current chat into The Lab preserves useful context without forcing future intake to stay mixed.
 
 New chats inside the project allow clean separation between:
 
@@ -91,12 +87,8 @@ GitHub remains useful for durable, sanitized workflows and logs, but it does not
 
 ## Project Instruction Draft
 
-This project is an audit lab for evaluating incoming ideas, tools, Reels/posts, workflow opportunities, and data-source/scraper experiments. Keep early intake lightweight and avoid over-building weak ideas. Use routing stages: Inbox, Triage, Evidence Pass, Audit, Route. When an idea passes initial usefulness proof and belongs to an existing project, create a handoff and move implementation there. When an idea is promising but has no project home, move it from Intake to Lab/Incubator. Keep raw datasets and signed/private links out of GitHub; log sanitized summaries, workflows, costs, and decisions instead. Avoid HVAC/work-realism bias unless explicitly requested. Treat clout as a signal, not validation.
+This project is an audit lab for evaluating incoming ideas, tools, Reels/posts, workflow opportunities, and data-source/scraper experiments. Keep early intake lightweight and avoid over-building weak ideas. Use routing stages: Inbox, Triage, Evidence Pass, Audit, Route. When an idea passes initial usefulness proof and belongs to an existing project, create a handoff and move implementation there. When an idea is promising but has no project home, move it from Intake to Incubator. Use the GitHub repo `Unl0ckedzERO/The-Lab` as the durable ledger for sanitized workflows, tool tests, decisions, routing rules, naming rules, and project handoff notes. Do not commit raw datasets, signed/private links, API keys, or sensitive metadata; summarize and sanitize before logging. Avoid HVAC/work-realism bias unless explicitly requested. Treat clout as a signal, not validation.
 
 ## Decision Rule
 
-Move this chat into a project if the goal is to preserve and reuse the architecture and tool-test context.
-
-Create new chats inside the project if the goal is to keep future intake clean.
-
-Do both.
+Keep this mixed chat as archive/context. Create new chats inside The Lab if the goal is to keep future intake clean.
