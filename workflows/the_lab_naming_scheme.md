@@ -1,17 +1,18 @@
 # The Lab Naming Scheme
 
 Date created: 2026-06-13  
+Updated: 2026-06-13  
 Scope: Chat/project/repo naming conventions for The Lab project.
 
 ## Core Decision
 
 Use `The Lab` as the umbrella project name.
 
-Use `Incubator` instead of `Lab` for validated ideas and tool tests that passed initial intake but do not yet belong to an existing project.
+Use `Incubator` for validated ideas and tool tests that passed initial intake but do not yet belong to an existing project.
 
 This avoids confusion between the project name (`The Lab`) and the maturation space (`Incubator`).
 
-## Recommended Chat Names
+## Final Recommended Chat Names
 
 ### `Intake — Reels, Tools, Ideas`
 
@@ -33,7 +34,7 @@ Purpose:
 - Ideas or tools that passed initial usefulness proof.
 - No clear existing project home yet.
 - Small experiments, tool comparisons, and hypothesis refinement.
-- Later handoff to existing project or dedicated project if it matures.
+- Later handoff to an existing project or dedicated project if it matures.
 
 Opening context phrase:
 
@@ -51,7 +52,7 @@ Opening context phrase:
 
 `This chat will be used for Framework work as defined in The Lab / Git repo.`
 
-### `Audit Lab v0 / Mixed Archive`
+### `Archive — Audit Lab v0 / Mixed Chat`
 
 Purpose:
 
@@ -59,27 +60,13 @@ Purpose:
 - Contains the original development of the Reels/business audit, Parse/Firecrawl/Apify testing, job-search handoff work, and framework decisions.
 - Useful for reference, but not the clean future Intake space.
 
-## Repo Name Consideration
+## Current Repo Reference
 
-The repo can be renamed from `Scraper-Audit` to `The-Lab` or `The-Lab-Audit` if the user wants naming consistency.
+Use:
 
-Recommended repo name if renaming:
+`Unl0ckedzERO/The-Lab`
 
-`The-Lab`
-
-Alternative if wanting slightly clearer function:
-
-`The-Lab-Audit`
-
-If renamed, keep a note in the repo explaining that it was formerly `Scraper-Audit` and that older references may use the old name.
-
-## Current Repo Reference Rule
-
-Until the repo is renamed, continue using:
-
-`Unl0ckedzERO/Scraper-Audit`
-
-If renamed, update project instructions and durable references to the new repo name.
+This repository was originally named `Scraper-Audit`. Older notes, commits, and references may use that name. Going forward, use `The Lab` for the project and `Unl0ckedzERO/The-Lab` for the repository.
 
 ## Suggested Umbrella Terms
 
@@ -93,13 +80,7 @@ If renamed, update project instructions and durable references to the new repo n
 - `Framework`: system and process design
 - `Archive`: historical mixed context
 
-## Recommended Project Instruction Adjustment
-
-If the repo remains `Scraper-Audit`, use:
-
-`Use the GitHub repo Unl0ckedzERO/Scraper-Audit, or its renamed successor, as the durable ledger for sanitized workflows, tool tests, decisions, routing rules, naming rules, and project handoff notes.`
-
-If the repo is renamed to `The-Lab`, use:
+## Recommended Project Instruction Line
 
 `Use the GitHub repo Unl0ckedzERO/The-Lab as the durable ledger for sanitized workflows, tool tests, decisions, routing rules, naming rules, and project handoff notes.`
 
