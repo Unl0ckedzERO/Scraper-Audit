@@ -4,6 +4,12 @@ The Lab is an audit space for evaluating incoming ideas, tools, Reels/posts, wor
 
 It is designed to keep early intake lightweight while giving promising ideas a clear path into incubation, existing projects, or archive.
 
+## Start Here
+
+Read `MANIFEST.md` first when trying to find relevant workflows, handoffs, tests, decisions, routing rules, or naming rules without knowing exact filenames.
+
+Use `README.md` for the high-level project model and `MANIFEST.md` as the repo discovery index.
+
 ## Core Zones
 
 ### Intake
