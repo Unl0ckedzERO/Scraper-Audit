@@ -11,6 +11,8 @@ Raw dataset stored: No — only sanitized summary and evaluation are committed.
 
 The actor returned 20 structured job records. This is a successful extraction test.
 
+Follow-up note: Later Apify runs verified the standard pricing model at `$0.005` per returned job (`$5 / 1,000 jobs`) and clarified that this actor should be treated as the paid bulk export layer, not the default free search layer. See `tests/2026-06-14_apify_indeed_paid_export_layer_evaluation.md`.
+
 ## Field Coverage
 
 Observed field coverage across 20 records:
@@ -66,7 +68,7 @@ Apify produced clean job records directly in one run, including job title, compa
 
 - Some company names are inferred from `source` rather than `companyName` when companyName is missing.
 - Some search relevance drift is present: examples include architectural millwork project manager, water/wastewater operator, drivers, and other adjacent roles.
-- Need actual Apify cost used from run details to calculate value per clean row.
+- Cost is now verified as predictable and linear at `$0.005` per returned job; this is reasonable for controlled exports but not free enough for casual large sweeps.
 - Need to verify whether `max rows` and filters reliably prevent runaway runs.
 - Need to determine whether output duplicates appear on larger runs.
 
@@ -86,7 +88,7 @@ Apify borderline result:
 
 ## Verdict
 
-Strong success. Keep `borderline/indeed-scraper` as the current best Indeed extraction candidate.
+Strong success. Keep `borderline/indeed-scraper` as the current best Indeed paid extraction candidate.
 
 Provisional rating:
 
@@ -94,13 +96,13 @@ Provisional rating:
 - Sheet-readiness: 8/10
 - Field richness: 9/10
 - Relevance: 7/10
-- Cost certainty: pending user-provided run cost
-- Overall: Adopt for controlled tests, pending cost verification
+- Cost certainty: verified in follow-up at `$0.005` per returned job
+- Overall: Adopt for controlled paid exports after connector/Parse triage
 
 ## Next Steps
 
-1. User should record actual run cost from Apify.
-2. Test same actor with `Save only unique jobs` on and `View similar jobs` off if not already set.
-3. Run one second small query with a more specific title, such as `grader operator` or `highway maintenance`, to evaluate precision.
-4. If cost is acceptable, define a Google Sheets export mapping.
-5. Compare one cheap alternative actor only if cost is too high.
+1. Use the ChatGPT Indeed connector first for no-extra-cost interactive review.
+2. Use Parse only when counts, related queries, job keys, or selective enrichment are useful.
+3. Use Apify when a lane is worth exporting into structured rows.
+4. Prefer small 25-100 row exports before broad state/national sweeps.
+5. If an active Job Search project needs it, define a Google Sheets export mapping from the Apify fields.
