@@ -42,6 +42,22 @@ Common route outcomes:
 | Framework | Routing rules, naming rules, architecture, rubrics, thresholds, repo organization | One-off raw idea audits or tool runs unless they define a system rule |
 | Archive | Prior mixed work, historical context, old decisions | Active tests unless they are only being referenced historically |
 
+## Active Chat Map
+
+Current active Lab chats are indexed in `framework/2026-06-15_active_lab_chat_map.md`.
+
+Current operating layout:
+
+| Chat | Zone | Role |
+|---|---|---|
+| Archive | Archive | Historical setup, mixed prior context, and setup validation |
+| Intake | Intake | Raw incoming ideas, tools, posts, claims, and first-pass triage |
+| Indeed API Incubator | Incubator | Active lane for Indeed API / Parse / Apify scraper testing |
+| LLM Council Skill Incubator | Incubator | Active lane for LLM Council / Claude Skill pressure-test experiments |
+| Framework | Framework | Main system-design chat for routing, manifests, standards, and repo structure |
+
+Update the active chat map whenever a Lab chat is created, retired, renamed, or materially changes role.
+
 ## Discovery Rules for Future Chats
 
 When a user asks about prior Lab work:
@@ -67,6 +83,7 @@ Search cues to try:
 |---|---|---|---|
 | `README.md` | Repo overview | Lab purpose, core zones, routing stages, routing outcomes, logging rules, naming standard | start here, routing, zones, logging, naming |
 | `MANIFEST.md` | Discovery index | Finding relevant workflows, tests, handoffs, and framework rules without exact filenames | manifest, index, discovery, handoff, tests |
+| `framework/2026-06-15_active_lab_chat_map.md` | Framework / project architecture | Current active Lab chat structure and operating roles | active chats, chat map, Archive, Intake, Incubator, Framework, Indeed API Incubator, LLM Council Skill Incubator |
 
 ### Incubator Handoffs
 
