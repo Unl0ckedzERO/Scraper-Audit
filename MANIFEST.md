@@ -97,6 +97,7 @@ Search cues to try:
 |---|---|---|---|---|
 | `handoffs/incubator_parse_indeed_search_table_experiment.md` | Incubator Handoff | Handoff for testing whether Parse's Indeed marketplace API can be revised or used differently to return clean job-card rows from search. | Continue as bounded Incubator test; move to Job Search only if Parse can produce clean, affordable rows competitive with Apify. | Parse, Indeed, Incubator, search rows, search_jobs_detailed, Apify comparison, job search handoff |
 | `handoffs/intake-to-incubator/2026-06-15-llm-council-claude-skill.md` | Intake → Incubator Handoff | Handoff for testing whether the LLM Council / Claude Skill pressure-test pattern improves Lab routing decisions without overbuilding Intake. | Continue as bounded Incubator proof; move to Framework only if it proves useful as an optional Council Pass rubric. | LLM Council, Claude Skill, pressure-test, Council Pass, sycophancy, validation bias, prompting, Incubator, Framework |
+| `handoffs/framework-to-incubator/2026-06-17-instagram-reel-scraper-intake-evidence-test.md` | Framework → Incubator Handoff | Handoff for testing Apify Instagram/Reels scrapers and hybrid workflows against the Instagram Reel Intake evidence standard. | Run bounded Incubator comparison; choose whether paid scrape bundles should supplement or replace screen recording for Intake. | Instagram, Reel, Apify, scraper, Intake evidence, screen recording, comments, creator metadata, engagement, legitimacy, Framework, Incubator |
 
 ### Indeed / Job Search / Scraper Tests
 
