@@ -1,6 +1,6 @@
 # Active Lab Chat Map
 
-Date: 2026-06-15
+Date: 2026-06-17
 Type: Framework / Project Architecture
 Status: Current operating map
 
@@ -18,6 +18,7 @@ The chat map is structural context only. Raw tests, datasets, private links, and
 | Intake | Intake | Raw incoming ideas, tools, posts, claims, and first-pass triage | Should stay lightweight; mature or useful ideas should not remain here indefinitely. |
 | Indeed API Incubator | Incubator | Active incubator lane for Indeed API / Parse / Apify scraper testing | Handles bounded tests around job-search scraping, paid export layers, row extraction, and connector/API comparisons. |
 | LLM Council Skill Incubator | Incubator | Active incubator lane for the LLM Council / Claude Skill pressure-test idea | Handles bounded tests of whether a council-style critique pass improves Lab routing decisions without overbuilding Intake. |
+| Instagram Reel Scraper Incubator | Incubator | Active incubator lane for Instagram Reel scraper / Intake evidence workflow testing | Handles bounded comparisons of Apify Instagram/Reels scrapers and hybrid evidence workflows against the Framework Reel Intake evidence standard. |
 | Framework | Framework | Main system-design chat for The Lab | Owns routing rules, naming rules, manifests, handoff standards, rubrics, thresholds, and repo structure. |
 
 ## Operating Rule
@@ -42,10 +43,11 @@ Do not use Framework for:
 
 ## Current Incubator Chats
 
-The Lab currently has two active Incubator chats:
+The Lab currently has three active Incubator chats:
 
 1. Indeed API Incubator
 2. LLM Council Skill Incubator
+3. Instagram Reel Scraper Incubator
 
 New Incubator chats should only be created when a validated idea needs its own bounded experiment lane and would clutter the general Incubator pattern.
 
