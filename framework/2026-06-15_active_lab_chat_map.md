@@ -18,8 +18,13 @@ The chat map is structural context only. Raw tests, datasets, private links, and
 | Intake | Intake | Raw incoming ideas, tools, posts, claims, and first-pass triage | Should stay lightweight; mature or useful ideas should not remain here indefinitely. |
 | Indeed API Incubator | Incubator | Active incubator lane for Indeed API / Parse / Apify scraper testing | Handles bounded tests around job-search scraping, paid export layers, row extraction, and connector/API comparisons. |
 | LLM Council Skill Incubator | Incubator | Active incubator lane for the LLM Council / Claude Skill pressure-test idea | Handles bounded tests of whether a council-style critique pass improves Lab routing decisions without overbuilding Intake. |
-| Instagram Reel Scraper Incubator | Incubator | Active incubator lane for Instagram Reel scraper / Intake evidence workflow testing | Handles bounded comparisons of Apify Instagram/Reels scrapers and hybrid evidence workflows against the Framework Reel Intake evidence standard. |
 | Framework | Framework | Main system-design chat for The Lab | Owns routing rules, naming rules, manifests, handoff standards, rubrics, thresholds, and repo structure. |
+
+## Concluded / Handoff-Complete Incubator Chats
+
+| Chat | Former Zone | Outcome | Notes |
+|---|---|---|---|
+| Instagram Reel Scraper Incubator | Incubator | Concluded testing; handed off to Intake | Produced the current preferred Instagram Reel upload path using cheap Apify scrape output, local `whisper.cpp`, and upload-ready ZIP bundles. Return here only for workflow fixes or replacement tests. |
 
 ## Operating Rule
 
@@ -43,13 +48,12 @@ Do not use Framework for:
 
 ## Current Incubator Chats
 
-The Lab currently has three active Incubator chats:
+The Lab currently has two active Incubator chats:
 
 1. Indeed API Incubator
 2. LLM Council Skill Incubator
-3. Instagram Reel Scraper Incubator
 
-New Incubator chats should only be created when a validated idea needs its own bounded experiment lane and would clutter the general Incubator pattern.
+Instagram Reel Scraper Incubator is no longer an active test lane; its result is now an Intake upload workflow. Reopen or create a new bounded Incubator test only if the workflow fails, a scraper replacement is being compared, or the evidence standard needs a major revision.
 
 ## When to Update This File
 
