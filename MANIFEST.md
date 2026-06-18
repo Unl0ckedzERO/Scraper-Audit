@@ -99,6 +99,7 @@ Search cues to try:
 | `handoffs/incubator_parse_indeed_search_table_experiment.md` | Incubator Handoff | Handoff for testing whether Parse's Indeed marketplace API can be revised or used differently to return clean job-card rows from search. | Continue as bounded Incubator test; move to Job Search only if Parse can produce clean, affordable rows competitive with Apify. | Parse, Indeed, Incubator, search rows, search_jobs_detailed, Apify comparison, job search handoff |
 | `handoffs/intake-to-incubator/2026-06-15-llm-council-claude-skill.md` | Intake → Incubator Handoff | Handoff for testing whether the LLM Council / Claude Skill pressure-test pattern improves Lab routing decisions without overbuilding Intake. | Continue as bounded Incubator proof; move to Framework only if it proves useful as an optional Council Pass rubric. | LLM Council, Claude Skill, pressure-test, Council Pass, sycophancy, validation bias, prompting, Incubator, Framework |
 | `handoffs/framework-to-incubator/2026-06-17-instagram-reel-scraper-intake-evidence-test.md` | Framework → Incubator Handoff | Handoff for testing Apify Instagram/Reels scrapers and hybrid workflows against the Instagram Reel Intake evidence standard. | Run bounded Incubator comparison; choose whether paid scrape bundles should supplement or replace screen recording for Intake. | Instagram, Reel, Apify, scraper, Intake evidence, screen recording, comments, creator metadata, engagement, legitimacy, Framework, Incubator |
+| `handoffs/2026-06-17_incubator_to_intake_instagram_reel_upload_path.md` | Incubator → Intake Handoff | Handoff for the proven Instagram Reel upload path using cheap scrape output, local `whisper.cpp`, and upload-ready ZIP bundles. | Adopt for Intake when a Reel scrape is justified; return to Incubator only for workflow fixes or replacement tests. | Instagram, Reel, Intake, Apify, whisper.cpp, transcript, upload bundle, ZIP, Raw Reels, Refined Reels, scraper workflow |
 
 ### Indeed / Job Search / Scraper Tests
 
@@ -108,6 +109,12 @@ Search cues to try:
 | `tests/2026-05-26_parse_indeed_montana_search_and_revision_hypothesis.md` | Evidence Pass / Audit | Montana `equipment operator` search via Parse; confirmed localized result counts, job keys, pagination, related queries, and missing clean row fields. Defines `search_jobs_detailed` revision hypothesis. | Selective discovery candidate. Do not spend on revision until Apify or another cleaner row-level extractor is tested. | Parse, Indeed, Montana, equipment operator, related queries, pagination, search_jobs_detailed, revision hypothesis |
 | `tests/2026-05-26_apify_borderline_indeed_results_evaluation.md` | Evidence Pass / Audit | Apify `borderline/indeed-scraper` returned 20 structured job records with title, company/source, location, job URL, descriptions, dates, job type, and salary for most records. | Strong success. Original cost certainty was pending; see 2026-06-14 Apify paid export evaluation for verified pricing and export-layer routing. | Apify, borderline, Indeed scraper, clean rows, salary, apply URL, dataset, Google Sheets, job search |
 | `tests/2026-06-14_apify_indeed_paid_export_layer_evaluation.md` | Incubator / Tool Stack | Apify `borderline/indeed-scraper` follow-up documenting verified `$0.005/job` pricing, 5-row/25-row/100-row runs, rich field coverage, export format guidance, and tool-stack routing. | Adopt as paid bulk export layer after connector/Parse triage; do not use for casual broad sweeps without narrowing. | Apify, Indeed, paid export, $5 per 1000 jobs, row extraction, connector comparison, Parse comparison, Google Sheets, JSON, CSV, Excel |
+
+### Instagram / Reel Intake / Scraper Tests
+
+| File | Stage | Summary | Verdict / Route | Search Tags |
+|---|---|---|---|---|
+| `tests/2026-06-17_instagram_reel_scraper_upload_path_closeout.md` | Incubator / Tool Stack | Closeout for the Instagram Reel scraper upload path: cheap scraper media links, local `whisper.cpp` transcription, and ZIP bundles for Intake. | Adopt as Intake upload path when a Reel scrape is justified; keep raw media/JSON out of repo. | Instagram, Reel, Reels, Apify, scraper, whisper.cpp, transcript, Raw Reels, Refined Reels, ZIP bundle, Intake evidence |
 
 ## Current Decision Index
 
@@ -130,6 +137,25 @@ Use this decision when routing future Indeed scraper work:
 - Controlled actor comparison: Incubator.
 - Clean export mapping for an active job-search project: Existing Project Handoff.
 - General rules about when a scraper is good enough: Framework.
+
+### Instagram Reel Intake Upload Path
+
+Decision: The preferred Intake upload path for selected Instagram Reels is cheap scraper output with transcript/download toggles off, downloaded media from returned links, local `whisper.cpp large-v3-turbo` transcription, and an upload-ready ZIP bundle containing media, transcript, and matching Apify JSON export.
+
+Rationale:
+
+- Tested scraper media links were sufficient to download usable audio/video files.
+- Paid Apify transcript and video-download toggles were not necessary by default.
+- Local `whisper.cpp` transcription was competitive with the paid transcript toggle and may preserve literal phrasing better in some cases.
+- The folder/script workflow produced correctly paired bulk bundles for Intake upload.
+- Raw media, signed URLs, and raw JSON should remain local/uploaded to Intake as evidence, not committed to the repo.
+
+Use this decision when routing future Instagram Reel work:
+
+- Raw Reel with no scrape yet: Intake.
+- Reel selected for evidence review: use the upload-ready ZIP workflow.
+- Scraper/workflow failure or replacement comparison: Incubator.
+- Stable operating rule or quick-start: Framework.
 
 ## Intake to Incubator Handoff Standard
 
