@@ -2,19 +2,51 @@
 
 Date: 2026-06-17
 Type: Framework / Intake Evidence Standard
-Status: Draft standard for Incubator testing
+Status: Active standard with proven ZIP upload path
 
 ## Purpose
 
 This standard defines what information Intake should ideally receive when evaluating an Instagram Reel, post, or similar short-form social item as a possible Lab idea, tool, workflow, business opportunity, or data-source experiment.
 
-It does not choose an Instagram scraper. The scraper/tool comparison belongs in a bounded Incubator test. This standard defines the target evidence bundle that the Incubator test should try to collect cheaply and reliably.
+It also defines the current default upload artifact for Reels selected for evidence review: an upload-ready `N-Reel.zip` bundle produced by the tested local Apify + media download + `whisper.cpp` workflow.
+
+The earlier scraper/tool comparison was completed in Incubator and returned a proven upload path. Future scraper changes or workflow repairs should go back to Incubator only when the current path breaks, becomes too costly, or needs bounded improvement.
 
 ## Core Principle
 
 Screen recordings are acceptable for lightweight Intake, but they are weak evidence by themselves because they can miss creator metadata, caption text, engagement numbers, comment quality, post age, linked resources, repost context, and signs of legitimacy or spam.
 
 The goal is not to make every Reel audit heavy. The goal is to preserve enough context that Intake can make better routing decisions and, when needed, hand off to Incubator without losing the source trail.
+
+For Reels selected for real evidence review, the preferred artifact is now the ZIP bundle, not a screen recording alone.
+
+## Adopted ZIP Upload Path
+
+For Instagram Reels selected for evidence review, Intake should prefer the generated ZIP bundle from the local workflow.
+
+Default user-facing artifact:
+
+- `N-Reel.zip` from `Desktop/Refined Reels`
+
+Expected ZIP contents:
+
+- Media file: audio-only or video, depending on what was downloaded from the scraper-provided media URL.
+- Local transcript produced with `whisper.cpp large-v3-turbo`.
+- Matching Apify JSON export for the Reel.
+
+Local folder structure:
+
+- `Desktop/Raw Reels` — raw media and matching Apify JSON exports before processing.
+- `Desktop/Raw Reels/_processed` — processed source files.
+- `Desktop/Refined Reels` — upload-ready ZIP files.
+- `Desktop/Refined Reels/Refined Roots` — loose transcript/media/JSON support files.
+
+Handling rules:
+
+- Use the ZIP bundle as the primary evidence upload when available.
+- Treat the transcript as evidence, not final truth.
+- Verify high-impact details such as money amounts, dates, names, product claims, quantities, and tool/repo names against the media or external sources when they matter.
+- Do not ask Intake to preserve or commit raw media, raw ZIP bundles, signed media URLs, private links, or unredacted scrape output to GitHub.
 
 ## Evidence Tiers
 
@@ -46,6 +78,10 @@ Limitations:
 ### Tier 1 — Standard Reel Evidence Bundle
 
 Use as the default target for Reels that may be worth more than a glance.
+
+Preferred artifact:
+
+- Upload-ready `N-Reel.zip` bundle from `Desktop/Refined Reels`
 
 Required fields:
 
@@ -133,6 +169,7 @@ Source URL:
 Creator handle:
 Initial category: Tool / Business / Lifestyle / Workflow / Data Source / Mixed / Unknown
 Evidence tier: 0 / 1 / 2 / 3
+Primary evidence artifact: N-Reel.zip / screen recording / screenshot / other
 
 ## Why I’m Sending This
 
@@ -154,6 +191,7 @@ Evidence tier: 0 / 1 / 2 / 3
 - Comments:
 - Shares/saves if available:
 - Post age/date:
+- ZIP contents if applicable: media / transcript / Apify JSON
 
 ## Creator / Source Context
 
@@ -183,7 +221,7 @@ Should this be rejected, watched, evidence-passed, moved to Incubator, or handed
 
 ## Sanitization Notes
 
-Do not preserve private links, signed media URLs, cookies, account-specific tokens, unnecessary user metadata, or raw scrape output unless explicitly needed and safe.
+Do not preserve private links, signed media URLs, cookies, account-specific tokens, unnecessary user metadata, raw ZIP bundles, media files, or raw scrape output unless explicitly needed and safe.
 ```
 
 ## Intake Decision Support
@@ -226,9 +264,9 @@ These should increase confidence:
 - Claim can be tested with a small bounded experiment
 - Idea maps cleanly to an existing Lab category or project
 
-## Incubator Test Target
+## Workflow Maintenance / Future Retest Criteria
 
-The future Instagram scraper/workflow Incubator test should compare candidate strategies against this standard.
+The current upload path is adopted, but future scraper/workflow revisions should be scored against this standard before replacing it.
 
 A candidate scraper or workflow should be scored on:
 
@@ -243,10 +281,8 @@ A candidate scraper or workflow should be scored on:
 | External links | Does it preserve mentioned links or profile links? |
 | Cost per Reel | Is the cost acceptable for selective known-Reel intake? |
 | Reliability | Does it work consistently without fragile errors? |
-| Export usability | Is output easy to paste into Intake or convert into the template? |
+| Export usability | Is output easy to upload, paste into Intake, or convert into the template? |
 | Sanitization | Can raw/private/signed fields be excluded before repo logging? |
-
-## Proposed Scoring for Incubator
 
 Use a 0–2 score for each criterion:
 
@@ -254,7 +290,7 @@ Use a 0–2 score for each criterion:
 - 1 = partial / usable with cleanup
 - 2 = clean and reliable
 
-A scraper/workflow is a serious candidate if it scores well on:
+A replacement scraper/workflow is a serious candidate only if it improves the current path on one or more of:
 
 - known Reel URL support
 - caption quality
@@ -262,24 +298,25 @@ A scraper/workflow is a serious candidate if it scores well on:
 - creator metadata
 - cost per Reel
 - export usability
+- media/transcript handling
+- reliability
 
-Comments and transcript support are valuable, but they should not be mandatory if another cheap step can capture them.
+Comments and transcript support are valuable, but they should not be mandatory inside the scraper if another cheap local step captures them.
 
-## Recommended Workflow Hypothesis
-
-Before testing, the likely best workflow is hybrid:
+## Active Workflow
 
 1. Intake still accepts a screen recording for low-friction context.
-2. If the Reel looks worth evaluating, add a Tier 1 or Tier 2 scrape bundle.
-3. Intake uses the standard template to make a first routing decision.
-4. If promising, create an Intake-to-Incubator handoff with the source URL, claim, evidence summary, unknowns, and proposed test.
-5. Do not commit raw scrape output to the repo; commit sanitized summaries, decisions, handoffs, and test evaluations only.
+2. If the Reel looks worth evaluating, prefer the `N-Reel.zip` bundle from `Desktop/Refined Reels`.
+3. Intake uses the ZIP contents and this standard to make a first routing decision.
+4. Treat local transcripts as evidence, not final truth; verify high-impact details when they matter.
+5. If promising, create an Intake-to-Incubator handoff with the source URL, claim, evidence summary, unknowns, and proposed test.
+6. Do not commit raw scrape output, raw ZIP bundles, media files, signed URLs, private links, credentials, or unredacted API responses to the repo; commit sanitized summaries, decisions, handoffs, and test evaluations only.
 
 ## Routing Rule
 
 - Weak curiosity: Intake with screen recording only.
-- Plausible idea: Intake with Tier 1 bundle.
-- Promising tool/workflow/business claim: Intake with Tier 2 bundle.
-- Paid tool comparison or scraper selection: Incubator.
-- Adoption of a repeatable evidence standard: Framework.
+- Plausible idea: Intake with Tier 1 ZIP bundle when available.
+- Promising tool/workflow/business claim: Intake with Tier 2 evidence bundle.
+- Paid tool comparison or scraper replacement: Incubator.
+- Stable adoption or revision of the repeatable evidence standard: Framework.
 - Implementation in an existing project: Existing Project Handoff.
