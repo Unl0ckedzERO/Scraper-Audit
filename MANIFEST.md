@@ -54,8 +54,13 @@ Current operating layout:
 | Intake | Intake | Raw incoming ideas, tools, posts, claims, and first-pass triage |
 | Indeed API Incubator | Incubator | Active lane for Indeed API / Parse / Apify scraper testing |
 | LLM Council Skill Incubator | Incubator | Active lane for LLM Council / Claude Skill pressure-test experiments |
-| Instagram Reel Scraper Incubator | Incubator | Active lane for Instagram Reel scraper / Intake evidence workflow testing |
 | Framework | Framework | Main system-design chat for routing, manifests, standards, and repo structure |
+
+Concluded / handoff-complete Incubator lanes:
+
+| Chat | Former Zone | Outcome |
+|---|---|---|
+| Instagram Reel Scraper Incubator | Incubator | Testing concluded; current upload path handed off to Intake. Reopen only for workflow fixes, scraper replacement tests, or major evidence-standard revisions. |
 
 Update the active chat map whenever a Lab chat is created, retired, renamed, or materially changes role.
 
@@ -84,13 +89,13 @@ Search cues to try:
 |---|---|---|---|
 | `README.md` | Repo overview | Lab purpose, core zones, routing stages, routing outcomes, logging rules, naming standard | start here, routing, zones, logging, naming |
 | `MANIFEST.md` | Discovery index | Finding relevant workflows, tests, handoffs, and framework rules without exact filenames | manifest, index, discovery, handoff, tests |
-| `framework/2026-06-15_active_lab_chat_map.md` | Framework / project architecture | Current active Lab chat structure and operating roles | active chats, chat map, Archive, Intake, Incubator, Framework, Indeed API Incubator, LLM Council Skill Incubator, Instagram Reel Scraper Incubator |
+| `framework/2026-06-15_active_lab_chat_map.md` | Framework / project architecture | Current active and concluded Lab chat structure and operating roles | active chats, concluded chats, chat map, Archive, Intake, Incubator, Framework, Indeed API Incubator, LLM Council Skill Incubator, Instagram Reel Scraper Incubator |
 
 ### Framework Standards / Rules
 
 | File | Stage | Summary | Verdict / Route | Search Tags |
 |---|---|---|---|---|
-| `framework/2026-06-17_instagram_reel_intake_evidence_standard.md` | Framework / Intake Evidence Standard | Defines evidence tiers and fields Intake should ideally capture for Instagram Reels before routing to Evidence Pass, Incubator, Tool Stack, or project handoff. | Use as target standard for the future Instagram scraper/workflow Incubator test; does not choose a scraper by itself. | Instagram, Reel, Reels, short-form video, Intake evidence, screen recording, Apify, scraper, comments, creator metadata, engagement, legitimacy, evidence bundle |
+| `framework/2026-06-17_instagram_reel_intake_evidence_standard.md` | Framework / Intake Evidence Standard | Defines evidence tiers and fields Intake should ideally capture for Instagram Reels before routing to Evidence Pass, Incubator, Tool Stack, or project handoff. | Use as the evidence standard behind the adopted Instagram Reel upload workflow; future scraper replacements should compare against this standard. | Instagram, Reel, Reels, short-form video, Intake evidence, screen recording, Apify, scraper, comments, creator metadata, engagement, legitimacy, evidence bundle |
 
 ### Incubator Handoffs
 
@@ -98,7 +103,7 @@ Search cues to try:
 |---|---|---|---|---|
 | `handoffs/incubator_parse_indeed_search_table_experiment.md` | Incubator Handoff | Handoff for testing whether Parse's Indeed marketplace API can be revised or used differently to return clean job-card rows from search. | Continue as bounded Incubator test; move to Job Search only if Parse can produce clean, affordable rows competitive with Apify. | Parse, Indeed, Incubator, search rows, search_jobs_detailed, Apify comparison, job search handoff |
 | `handoffs/intake-to-incubator/2026-06-15-llm-council-claude-skill.md` | Intake → Incubator Handoff | Handoff for testing whether the LLM Council / Claude Skill pressure-test pattern improves Lab routing decisions without overbuilding Intake. | Continue as bounded Incubator proof; move to Framework only if it proves useful as an optional Council Pass rubric. | LLM Council, Claude Skill, pressure-test, Council Pass, sycophancy, validation bias, prompting, Incubator, Framework |
-| `handoffs/framework-to-incubator/2026-06-17-instagram-reel-scraper-intake-evidence-test.md` | Framework → Incubator Handoff | Handoff for testing Apify Instagram/Reels scrapers and hybrid workflows against the Instagram Reel Intake evidence standard. | Run bounded Incubator comparison; choose whether paid scrape bundles should supplement or replace screen recording for Intake. | Instagram, Reel, Apify, scraper, Intake evidence, screen recording, comments, creator metadata, engagement, legitimacy, Framework, Incubator |
+| `handoffs/framework-to-incubator/2026-06-17-instagram-reel-scraper-intake-evidence-test.md` | Framework → Incubator Handoff | Original handoff for testing Apify Instagram/Reels scrapers and hybrid workflows against the Instagram Reel Intake evidence standard. | Completed; see closeout test and Incubator → Intake handoff for adopted upload path. | Instagram, Reel, Apify, scraper, Intake evidence, screen recording, comments, creator metadata, engagement, legitimacy, Framework, Incubator |
 | `handoffs/2026-06-17_incubator_to_intake_instagram_reel_upload_path.md` | Incubator → Intake Handoff | Handoff for the proven Instagram Reel upload path using cheap scrape output, local `whisper.cpp`, and upload-ready ZIP bundles. | Adopt for Intake when a Reel scrape is justified; return to Incubator only for workflow fixes or replacement tests. | Instagram, Reel, Intake, Apify, whisper.cpp, transcript, upload bundle, ZIP, Raw Reels, Refined Reels, scraper workflow |
 
 ### Indeed / Job Search / Scraper Tests
