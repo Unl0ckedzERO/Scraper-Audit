@@ -10,7 +10,7 @@ Raw Data Stored: No — only sanitized summary and evaluation are committed.
 
 Did the Parse `Subscribe` path allow free revisions to the public/subscribed `indeed.com` API variant, and can a revised endpoint return compact Indeed search-result rows without per-job detail calls?
 
-Secondary question: does the result change the Parse vs Apify cost/usefulness decision for Indeed job extraction?
+Secondary question: does free revision support make Parse useful for cost/yield optimization against Apify?
 
 ## Setup
 
@@ -34,6 +34,20 @@ Controlled revision test:
    - `fromage`: `14`
    - `start`: `0`
 
+Optimization follow-up:
+
+- Add `search_jobs_rows_compact_v2` to test whether a larger `limit` improves rows per runtime call.
+- Add `search_jobs_rows_compact_v3` to reduce duplicate upstream calls and preserve high row yield.
+- Typical optimization query:
+  - query: `equipment operator`
+  - location: `Montana`
+  - `jt`: `fulltime`
+  - `fromage`: `14`
+  - `start`: `0`
+  - `limit`: `50`
+  - `maxPages`: `1`
+  - `dedupe`: `true`
+
 ## Results
 
 ### Revision routing / billing
@@ -42,7 +56,7 @@ Controlled revision test:
 - Credits did not change.
 - New endpoint appeared on the subscribed API variant.
 - Private fork was unchanged.
-- `search_jobs_rows_compact` revision also succeeded and was free.
+- `search_jobs_rows_compact`, `search_jobs_rows_compact_v2`, and `search_jobs_rows_compact_v3` revisions succeeded and were free.
 
 Interpretation:
 
@@ -68,7 +82,7 @@ Sanitized output summary:
   - `spa.body`
   - `relatedQueries`
   - `totalJobCount`
-  - `uniqueJobsCount`
+  - `uniqueJobCount`
   - `metaData.mosaicProviderJobCardsModel.results`
 
 Returned compact fields included:
@@ -88,33 +102,77 @@ Returned compact fields included:
 | Apply URL | Missing | Use Apify or detail endpoint when needed. |
 | Benefits / attributes / requirements / occupation tags | Missing | Use Apify when needed. |
 
+### Optimization output
+
+`search_jobs_rows_compact_v2` tested `limit=50` and returned a much higher row yield.
+
+Sanitized v2 summary:
+
+- Cost: 7 credits.
+- `rowsReturned`: 53.
+- `detailCallsMade`: 0.
+- `extractionMode`: `search_page_only`.
+- `externalSearchCallsMade`: 2.
+- Result: High yield, but possibly over-fetched because it made two upstream search calls.
+
+`search_jobs_rows_compact_v3` was revised to avoid duplicate upstream requests for `maxPages=1`.
+
+Sanitized v3 summary:
+
+- Cost: 6 credits.
+- `rowsReturned`: 55.
+- `observedRowsBeforeDedupe`: 55.
+- `observedRowsAfterDedupe`: 55.
+- `observedRowsAfterFiltering`: 55.
+- `duplicatesRemoved`: 0.
+- `detailCallsMade`: 0.
+- `externalSearchCallsMade`: 1.
+- `fallbackSearchCallsMade`: 0.
+- `pagesRequested`: 1.
+- `pagesReturned`: 1.
+- `requestedLimit`: 50.
+- `limitAppearsHonored`: false.
+- Result: Strongest compact-row result. High yield was preserved while reducing upstream search calls to one.
+
+Interpretation:
+
+- `limit=50` materially improves compact row yield even though Parse reported `limitAppearsHonored: false`.
+- The practical result is that the underlying search/card payload exposed ~55 rows in one runtime call.
+- v3 should replace v1/v2 for compact preview use.
+
 ### Cost estimate
 
 Observed Parse compact-row tests around this endpoint:
 
-| Test | Credits | Rows | Credits / row |
-|---|---:|---:|---:|
-| Private-fork compact page 1 | 5 | 23 | 0.217 |
-| Private-fork compact page 2 | 6 | 15 | 0.400 |
-| Private-fork `loader operator` | 6 | 24 | 0.250 |
-| Subscribed compact typical test | 6 | 23 | 0.261 |
+| Test | Credits | Rows | Credits / row | Credits / 1,000 rows |
+|---|---:|---:|---:|---:|
+| Private-fork compact page 1 | 5 | 23 | 0.217 | 217 |
+| Private-fork compact page 2 | 6 | 15 | 0.400 | 400 |
+| Private-fork `loader operator` | 6 | 24 | 0.250 | 250 |
+| Subscribed compact typical test | 6 | 23 | 0.261 | 261 |
+| Compact v2, `limit=50` | 7 | 53 | 0.132 | 132 |
+| Compact v3, `limit=50` | 6 | 55 | 0.109 | 109 |
 
-Rough estimate:
+Updated estimate:
 
-- Observed range: ~0.22–0.40 credits/job.
-- Observed average from first three compact tests: ~0.274 credits/job, or ~274 credits per 1,000 compact rows.
-- Subscribed typical test: ~0.261 credits/job, or ~261 credits per 1,000 compact rows.
+- Earlier compact estimate: ~0.261–0.274 credits/job, or ~261–274 credits per 1,000 compact rows.
+- Optimized v3 estimate: ~0.109 credits/job, or ~109 credits per 1,000 compact rows.
 
 Parse free-tier implication:
 
-- 200 free credits/month ÷ ~0.261–0.274 credits/job ≈ ~730–765 compact rows/month.
-- Broad observed range ≈ ~500–920 compact rows/month depending on rows/page.
+- 200 free credits/month ÷ ~0.109 credits/job ≈ ~1,830 compact rows/month if v3 behavior holds.
+
+Parse paid Hobby implication:
+
+- $30/month for 1,000 credits = $0.03/credit.
+- 109 credits/1,000 compact rows × $0.03 ≈ $3.27 per 1,000 compact rows.
 
 Apify comparison:
 
 - Apify `borderline/indeed-scraper` verified pricing: ~$0.005/job, or ~$5/1,000 jobs.
 - Apify free $5 monthly credit therefore covers roughly 1,000 richer Indeed rows/month.
 - Apify records are richer than Parse compact rows.
+- Parse v3 is now cheaper per compact row if paid, and yields more rows on the free tier, but its records remain lighter.
 
 ## Evaluation
 
@@ -124,14 +182,16 @@ What worked:
 - A static endpoint can be added without credit cost.
 - `search_jobs_rows_compact` can be migrated to the subscribed variant for free.
 - Endpoint execution returns compact rows from search page state without per-job detail calls.
+- v2/v3 optimization materially improved row yield per runtime call.
+- v3 preserved high yield while reducing upstream search calls to one.
 - The endpoint is useful for cheap query testing, job-key collection, dedupe, related-query discovery, and first-pass row previews.
 
 What did not change:
 
 - Running endpoints still costs Parse credits.
 - Parse compact rows are lighter than Apify exports.
-- Parse paid economics are worse than Apify for bulk Indeed extraction under observed tests.
 - The endpoint has some relevance drift because it extracts what Indeed search cards expose.
+- Apify remains the richer export layer when full job descriptions, apply URLs, benefits, occupation tags, requirements, and company metadata are needed.
 
 New possibilities opened by free revisions:
 
@@ -141,6 +201,7 @@ New possibilities opened by free revisions:
 - Create source-specific compact row extractors for other marketplace APIs.
 - Prototype small workflow endpoints before deciding whether a tool deserves Incubator/Tool Stack adoption.
 - Use static `ping` endpoints as safety checks before larger revisions.
+- Optimize runtime yield by revising extraction behavior, limit behavior, filtering, dedupe, and batching.
 
 Guardrails:
 
@@ -148,22 +209,22 @@ Guardrails:
 - Start with a static no-external-call endpoint to confirm revision routing.
 - Do not commit raw API responses, tokens, internal page state, or unredacted output.
 - Treat free revisions as iteration savings, not free runtime.
-- Keep Apify as the richer export layer unless Parse becomes materially cheaper or richer.
+- Use v3 for compact previews; use Apify when richer job data is required.
 
 ## Verdict
 
 Tool Stack / Incubator decision:
 
-- Adopt Parse subscribed `search_jobs_rows_compact` as a lightweight compact preview and query-testing layer.
-- Keep Apify as the stronger free-tier and paid bulk/rich export layer for Indeed job data.
+- Adopt Parse subscribed `search_jobs_rows_compact_v3` as a lightweight compact preview and query-testing layer.
+- Keep Apify as the richer bulk export layer for full Indeed job data.
 - Keep the ChatGPT Indeed connector as the default interactive review layer.
 - Keep Parse platform behavior on a watchlist because the marketplace, versioning, and revision model are evolving quickly.
 
 ## Next Step
 
-Log this result in the manifest and stop further Indeed API testing unless one of these changes occurs:
+Stop broad Indeed API testing unless one of these targeted questions becomes useful:
 
-- Parse support clarifies a cheaper runtime path.
-- Parse marketplace exposes a richer Indeed rows endpoint.
-- The active Job Search project needs a compact preview export.
-- A separate Parse Platform Incubator chat is created for broader marketplace/API tracking.
+- Can v3 filtering improve relevant-row yield without losing good rows?
+- Can `maxPages=2` return 100+ rows for fewer credits than two separate calls?
+- Does v3 performance hold on other query types and locations?
+- Can a separate Parse Platform Incubator chat track broader marketplace/API evolution?
