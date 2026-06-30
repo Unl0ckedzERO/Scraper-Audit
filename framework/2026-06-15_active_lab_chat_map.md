@@ -1,6 +1,6 @@
 # Active Lab Chat Map
 
-Date: 2026-06-27
+Date: 2026-06-29
 Type: Framework / Project Architecture
 Status: Current operating map
 
@@ -17,6 +17,7 @@ The chat map is structural context only. Raw tests, datasets, private links, and
 | Archive | Archive | Historical setup, mixed prior context, setup validation | Used to check that the Lab structure, repo, and routing basics are set up properly. |
 | Intake | Intake | Raw incoming ideas, tools, posts, claims, and first-pass triage | Should stay lightweight; mature or useful ideas should not remain here indefinitely. |
 | LLM Council Skill Incubator | Incubator | Active incubator lane for the LLM Council / Claude Skill pressure-test idea | Handles bounded tests of whether a council-style critique pass improves Lab routing decisions without overbuilding Intake. |
+| Memory & Organization Layer Evaluation Incubator | Incubator | Active incubator lane for comparing GitHub-only, Airtable, Obsidian, Notion, Cognee, and MemPalace | Starts with a lightweight scorecard and one narrow sanitized tracker/retrieval test; GitHub remains the durable source of truth unless Framework changes that. |
 | Framework | Framework | Main system-design chat for The Lab | Owns routing rules, naming rules, manifests, handoff standards, rubrics, thresholds, and repo structure. |
 
 ## Concluded / Handoff-Complete Incubator Chats
@@ -48,9 +49,10 @@ Do not use Framework for:
 
 ## Current Incubator Chats
 
-The Lab currently has one active Incubator chat:
+The Lab currently has two active Incubator chats:
 
 1. LLM Council Skill Incubator
+2. Memory & Organization Layer Evaluation Incubator
 
 Instagram Reel Scraper Incubator is no longer an active test lane; its result is now an Intake upload workflow. Reopen or create a new bounded Incubator test only if the workflow fails, a scraper replacement is being compared, or the evidence standard needs a major revision.
 
