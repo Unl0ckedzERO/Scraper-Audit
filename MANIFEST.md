@@ -2,7 +2,7 @@
 
 Purpose: make The Lab repo easier for future chats to navigate without requiring exact filenames.
 
-Use this file as the first stop when a chat needs to find relevant workflows, handoffs, decisions, tests, routing rules, naming rules, or sanitized experiment evidence.
+Use this file as the first stop when a chat needs to find relevant workflows, handoffs, tests, decisions, routing rules, naming rules, or sanitized experiment evidence.
 
 This is a curated index, not a raw data store. Keep entries short, searchable, and sanitized.
 
@@ -53,6 +53,7 @@ Current operating layout:
 | Archive | Archive | Historical setup, mixed prior context, and setup validation |
 | Intake | Intake | Raw incoming ideas, tools, posts, claims, and first-pass triage |
 | LLM Council Skill Incubator | Incubator | Active lane for LLM Council / Claude Skill pressure-test experiments |
+| Memory & Organization Layer Evaluation Incubator | Incubator | Active lane for comparing GitHub-only, Airtable, Obsidian, Notion, Cognee, and MemPalace as support layers for project memory, structured tracking, retrieval, and future agent workflows |
 | Framework | Framework | Main system-design chat for routing, manifests, standards, and repo structure |
 
 Concluded / handoff-complete Incubator lanes:
@@ -89,7 +90,7 @@ Search cues to try:
 |---|---|---|---|
 | `README.md` | Repo overview | Lab purpose, core zones, routing stages, routing outcomes, logging rules, naming standard | start here, routing, zones, logging, naming |
 | `MANIFEST.md` | Discovery index | Finding relevant workflows, tests, handoffs, and framework rules without exact filenames | manifest, index, discovery, handoff, tests |
-| `framework/2026-06-15_active_lab_chat_map.md` | Framework / project architecture | Current active and concluded Lab chat structure and operating roles | active chats, concluded chats, chat map, Archive, Intake, Incubator, Framework, LLM Council Skill Incubator, Instagram Reel Scraper Incubator, Indeed API Incubator |
+| `framework/2026-06-15_active_lab_chat_map.md` | Framework / project architecture | Current active and concluded Lab chat structure and operating roles | active chats, concluded chats, chat map, Archive, Intake, Incubator, Framework, LLM Council Skill Incubator, Memory Organization Layer Evaluation Incubator, Instagram Reel Scraper Incubator, Indeed API Incubator |
 
 ### Framework Standards / Rules
 
@@ -123,6 +124,12 @@ Search cues to try:
 | File | Stage | Summary | Verdict / Route | Search Tags |
 |---|---|---|---|---|
 | `tests/2026-06-17_instagram_reel_scraper_upload_path_closeout.md` | Incubator / Tool Stack | Closeout for the Instagram Reel scraper upload path: cheap scraper media links, local `whisper.cpp` transcription, and ZIP bundles for Intake. | Adopt as Intake upload path when a Reel scrape is justified; keep raw media/JSON out of repo. | Instagram, Reel, Reels, Apify, scraper, whisper.cpp, transcript, Raw Reels, Refined Reels, ZIP bundle, Intake evidence |
+
+### Memory / Organization Layer Tests
+
+| File | Stage | Summary | Verdict / Route | Search Tags |
+|---|---|---|---|---|
+| `tests/2026-06-29_memory_organization_layer_scorecard_and_sanitized_test.md` | Incubator / Tool Comparison | Lightweight scorecard comparing GitHub-only baseline, Airtable, Obsidian, Notion, Cognee, and MemPalace, plus a narrow sanitized tracker/retrieval probe using repo files only. | Keep GitHub as source of truth; test Airtable-style tracker via repo-native simulation before any external base; defer Cognee/MemPalace to later privacy/security gate. | memory layer, organization layer, structured tracker, Airtable, Obsidian, Notion, Cognee, MemPalace, agent memory, source of truth, sanitized test |
 
 ## Current Decision Index
 
@@ -220,3 +227,4 @@ Can [tool/workflow/idea] do [specific useful outcome] better/cheaper/faster/more
 ## Routing After Test
 
 - If successful:
+```
